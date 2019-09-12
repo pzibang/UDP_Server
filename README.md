@@ -3,14 +3,15 @@
   *第一次提交的代码是存在bug的,下面的代码让我感到疑惑，在整个代码中，出现配置IP的地方就只有这里，但是
   *如果是服务器能够接受任意客户端访问的时候我们可以理解，这个IP是服务器的IP地址；另外一种情况是，我们要指定
   *客户端的地址才能进行访问，我找了许多博客，或者文章，发现基本的UDP服务器都是以以下下的形式进行初始化的：
+	
 	sockaddr_in serverAddr;										          //声明客户端地址信息结构体
-  memset(&serverAddr, 0, sizeof(serverAddr));					//清空
+ 	memset(&serverAddr, 0, sizeof(serverAddr));					//清空
   
 	serverAddr.sin_family = AF_INET;
 	serverAddr.sin_port = htons(CLIENT_PORT);					  //端口
 	//serverAddr.sin_addr.s_addr =htonl(INADDR_ANY);			//任意客户端连接
 	serverAddr.sin_addr.s_addr =  inet_addr("192.168.234.1");	//本机IP
-   //绑定套接字和地址
+   	//绑定套接字和地址
 	   if(bind(sock, (SOCKADDR*)&serverAddr, sizeof(SOCKADDR)) == SOCKET_ERROR)
 	{
 		perror("bind error\n");
