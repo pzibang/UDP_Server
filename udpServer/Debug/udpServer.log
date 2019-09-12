@@ -1,4 +1,4 @@
-﻿生成启动时间为 2019/9/11 10:23:20。
+﻿生成启动时间为 2019/9/12 9:06:19。
      1>项目“D:\dailyTask\20190909\udpServer\udpServer\udpServer.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\udpServer.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
@@ -19,4 +19,4 @@
 
 生成成功。
 
-已用时间 00:00:01.22
+已用时间 00:00:00.80

@@ -40,7 +40,14 @@ int main(void)
 	serverAddr.sin_family = AF_INET;
 	serverAddr.sin_port = htons(CLIENT_PORT);					//端口
 	//serverAddr.sin_addr.s_addr =htonl(INADDR_ANY);			//地址
-	serverAddr.sin_addr.s_addr =  inet_addr("127.0.0.1");
+	serverAddr.sin_addr.s_addr =  inet_addr("192.168.234.1");	//本机IP
+		
+	sockaddr_in clntAddr;										//客户端地址信息
+	clntAddr.sin_port = htons(CLIENT_PORT);						//端口
+	//clntAddr.sin_addr.s_addr =  inet_addr("192.168.234.129");		//客户端IP
+	clntAddr.sin_addr.s_addr =htonl(INADDR_ANY);			//地址
+	int nSize = sizeof(clntAddr);
+
 
 	//绑定套接字和地址
 	if(bind(sock, (SOCKADDR*)&serverAddr, sizeof(SOCKADDR)) == SOCKET_ERROR)
@@ -52,10 +59,6 @@ int main(void)
 	//接收客户端请求
 	while(1)
 	{
-		sockaddr_in clntAddr;  //客户端地址信息
-		memset(&clntAddr, 0, sizeof(sockaddr_in));	//清除客户端信息
-		int nSize = sizeof(clntAddr);
-
 		strLen = recvfrom(sock, revBuffer,  BUF_SIZE, 0,(struct sockaddr*) &clntAddr, &nSize);
 		if(strLen<0)
 		{
@@ -69,12 +72,11 @@ int main(void)
 		else
 		{
 			revBuffer[strLen] = 0;
-			printf("#server echo#  %s\n",revBuffer);	//打印接收的内容
+			printf(" received from %s   :  %s\n", inet_ntoa(clntAddr.sin_addr),revBuffer);	//打印接收的内容
+
 			if(strcmp(revBuffer,"quit") == 0)			//接收到"quit"字符串退出程序
 				break;
 		}
-
-
 
 	}
 
